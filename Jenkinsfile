@@ -13,7 +13,7 @@ pipeline {
             }
         }
 
-        //
+// -----
         
         stage('[ZAP] Baseline passive-scan') {
     steps {
@@ -42,7 +42,6 @@ pipeline {
     }
 }
 
-
-        //
+// -----
     }
 }
