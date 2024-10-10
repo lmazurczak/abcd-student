@@ -18,7 +18,7 @@ pipeline {
         stage('[ZAP] Baseline passive-scan') {
     steps {
         sh '''
-            docker run --name juice-shop -d --rm \
+            docker run --name juice-shop -d \
                 -p 3000:3000 \
                 bkimminich/juice-shop
             sleep 5
@@ -35,8 +35,9 @@ pipeline {
         always {
             sh '''
                 docker cp zap:/zap/wrk/zap_html_report.html /tmp/zap_html_report.html
-                docker cp zap:/zap/wrk/zap_xml_report.xml /tmp/zap_xml_report.xml
-                docker stop juice-shop
+                docker cp zap:/zap/wrk/zap_xml_report.xml /tmp/zap_xml_report.xm
+                docker stop zap juice-shop
+                docker rm zap
             '''
         }
     }
