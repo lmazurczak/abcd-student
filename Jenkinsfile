@@ -21,10 +21,11 @@ pipeline {
             docker run --name juice-shop -d --rm \
                 -p 3000:3000 \
                 bkimminich/juice-shop
-            sleep 5
+            sleep 5 || true
+            
         '''
         sh '''
-           docker run --name zap \
+           docker run --name zap --rm\
             --add-host=host.docker.internal:host-gateway \
             -v /home/kali/abcd-lab/resources/DAST/zap:/zap/wrk/:rw \
             -t ghcr.io/zaproxy/zaproxy:stable bash -c \
@@ -35,10 +36,7 @@ pipeline {
     post {
         always {
             sh '''
-                docker cp zap:/zap/wrk/zap_html_report.html /tmp/zap_html_report.html
-                docker cp zap:/zap/wrk/zap_xml_report.xml /tmp/zap_xml_report.xm
-                docker stop zap juice-shop
-                docker rm zap
+                docker stop zap juice-shop || true
             '''
         }
     }
