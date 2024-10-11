@@ -37,6 +37,10 @@ pipeline {
         always {
             sh '''
                 docker stop juice-shop || true
+                whoami
+                hostname
+                ls -la
+                
             '''
             defectDojoPublisher(artifact: '/home/kali/abcd-lab/resources/DAST/zap/reports/zap_xml_report.xml', 
                     productName: 'Juice Shop', 
