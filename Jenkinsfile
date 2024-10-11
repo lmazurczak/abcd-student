@@ -36,8 +36,12 @@ pipeline {
     post {
         always {
             sh '''
-                docker stop zap juice-shop || true
+                docker stop juice-shop || true
             '''
+            defectDojoPublisher(artifact: 'resources/DAST/zap/reports/zap_xml_report.xml', 
+                    productName: 'Juice Shop', 
+                    scanType: 'ZAP Scan', 
+                    engagementName: 'l.mazurczak@gmail.com')
         }
     }
 }
