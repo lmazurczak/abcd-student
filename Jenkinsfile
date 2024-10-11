@@ -19,7 +19,10 @@ pipeline {
 
             steps {
                 sh '''
+		mkdir -p ${WORKSPACE}/results || true
+        	ls -la
 		osv-scanner scan --lockfile package-lock.json --format json --output ${WORKSPACE}/results/sca-osv-scanner.json
+  		ls -la
   		'''
             }
         
