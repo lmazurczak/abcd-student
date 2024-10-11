@@ -25,6 +25,10 @@ pipeline {
             
         '''
         sh '''
+        mkdir -p ${WORKSPACE}/results || true
+        ls -la
+        '''
+        sh '''
            docker run --name zap \
             --add-host=host.docker.internal:host-gateway \
             -v /home/lukasz/abcd-lab/resources/DAST/zap:/zap/wrk/:rw \
@@ -36,15 +40,10 @@ pipeline {
     post {
         always {
             sh '''
-                // mkdir -p ${WORKSPACE}/results || true
                 docker cp zap:/zap/wrk/zap_html_report.html ${WORKSPACE}/results/zap_html_report.html
                 docker cp zap:/zap/wrk/zap_xml_report.xml ${WORKSPACE}/results/zap_xml_report.xml
                 docker stop juice-shop || true
                 docker rm zap
-                whoami
-                hostname
-                ls -la
-                
             '''
             defectDojoPublisher(artifact: '/home/lukasz/abcd-lab/resources/DAST/zap/reports/zap_xml_report.xml', 
                     productName: 'Juice Shop', 
