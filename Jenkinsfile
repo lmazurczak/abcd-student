@@ -40,12 +40,13 @@ pipeline {
     post {
         always {
             sh '''
+                docker start zap
                 docker cp zap:/zap/wrk/zap_html_report.html ${WORKSPACE}/results/zap_html_report.html
                 docker cp zap:/zap/wrk/zap_xml_report.xml ${WORKSPACE}/results/zap_xml_report.xml
-                docker stop juice-shop || true
+                docker stop juice-shop  zap || true
                 docker rm zap
             '''
-            defectDojoPublisher(artifact: '/home/lukasz/abcd-lab/resources/DAST/zap/reports/zap_xml_report.xml', 
+            defectDojoPublisher(artifact: '/home/lukaszxx/abcd-lab/resources/DAST/zap/reports/zap_xml_report.xml', 
                     productName: 'Juice Shop', 
                     scanType: 'ZAP Scan', 
                     engagementName: 'l.mazurczak@gmail.com')
