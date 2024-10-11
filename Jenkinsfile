@@ -39,6 +39,10 @@ pipeline {
 	        archiveArtifacts artifacts: 'results/**/*', fingerprint: true, allowEmptyArchive: true
 	        
 	 	echo 'Sending reports '
+		defectDojoPublisher(artifact: 'results/sca-osv-scanner.json', 
+                productName: 'Juice Shop', 
+                scanType: 'OSV Scan', 
+                engagementName: 'l.mazurczak@gmail.com')
             
         }
     }
