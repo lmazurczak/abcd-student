@@ -27,7 +27,7 @@ pipeline {
         sh '''
            docker run --name zap --rm\
             --add-host=host.docker.internal:host-gateway \
-            -v /home/kali/abcd-lab/resources/DAST/zap:/zap/wrk/:rw \
+            -v /home/lukasz/abcd-lab/resources/DAST/zap:/zap/wrk/:rw \
             -t ghcr.io/zaproxy/zaproxy:stable bash -c \
             "zap.sh -cmd -addonupdate; zap.sh -cmd -addoninstall communityScripts -addoninstall pscanrulesAlpha -addoninstall pscanrulesBeta -autorun /zap/wrk/passive_scan.yaml" \
             || true
@@ -42,7 +42,7 @@ pipeline {
                 ls -la
                 
             '''
-            defectDojoPublisher(artifact: '/home/kali/abcd-lab/resources/DAST/zap/reports/zap_xml_report.xml', 
+            defectDojoPublisher(artifact: '/home/lukasz/abcd-lab/resources/DAST/zap/reports/zap_xml_report.xml', 
                     productName: 'Juice Shop', 
                     scanType: 'ZAP Scan', 
                     engagementName: 'l.mazurczak@gmail.com')
