@@ -21,7 +21,7 @@ pipeline {
 		sh '''
         		mkdir -p ${WORKSPACE}/results || true
         	'''
-		sh 'osv-scanner scan --lockfile package-lock.json || true'
+		sh 'osv-scanner --lockfile package-lock.json || true'
 		    
                 sh 'osv-scanner scan --lockfile package-lock.json --format json --output ${WORKSPACE}/results/sca-osv-scanner.json || true'
 
@@ -39,11 +39,7 @@ pipeline {
 	        archiveArtifacts artifacts: 'results/**/*', fingerprint: true, allowEmptyArchive: true
 	        
 	 	echo 'Sending reports '
-		defectDojoPublisher(artifact: 'results/sca-osv-scanner.json', 
-                productName: 'Juice Shop', 
-                scanType: 'OSV Scan', 
-                engagementName: 'l.mazurczak@gmail.com')
-            
+		
         }
     }
 }
