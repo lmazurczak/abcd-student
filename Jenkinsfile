@@ -47,9 +47,9 @@ pipeline {
                 docker rm zap
             '''
             echo 'Archiving results ...'
-	        archiveArtifacts artifacts: '${WORKSPACE}/results/**/*', fingerprint: true, allowEmptyArchive: true
+	        archiveArtifacts artifacts: 'results/**/*', fingerprint: true, allowEmptyArchive: true
 	        echo 'Sending reports '
-            defectDojoPublisher(artifact: '${WORKSPACE}/results/zap_xml_report.xml', 
+            defectDojoPublisher(artifact: 'results/zap_xml_report.xml', 
                     productName: 'Juice Shop', 
                     scanType: 'ZAP Scan', 
                     engagementName: 'l.mazurczak@gmail.com')
