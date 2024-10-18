@@ -22,9 +22,9 @@ pipeline {
         		mkdir -p ${WORKSPACE}/results || true
 	  		ls -la
         	'''
-		sh 'trufflehog git file://. --only-verified'
+		sh 'trufflehog git file://. --since-commit main --only-verified'
 		
-		sh 'trufflehog git file://. --only-verified --json >${WORKSPACE}/results/trufflehog.json '
+		sh 'trufflehog git file://. --since-commit main --only-verified --json >${WORKSPACE}/results/trufflehog.json '
 		
 		sh '''
   			cd ${WORKSPACE}/results 
