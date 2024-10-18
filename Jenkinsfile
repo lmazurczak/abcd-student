@@ -41,6 +41,10 @@ pipeline {
 	        archiveArtifacts artifacts: 'results/**/*', fingerprint: true, allowEmptyArchive: true
 	        
 	 	echo 'Sending reports '
+		defectDojoPublisher(artifact: 'results/trufflehog.json', 
+                productName: 'Juice Shop', 
+                scanType: 'Trufflehog Scan', 
+                engagementName: 'l.mazurczak@gmail.com')
 		
         }
     }
