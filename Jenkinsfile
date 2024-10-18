@@ -24,11 +24,12 @@ pipeline {
         	'''
 		sh 'trufflehog git file://. --only-verified'
 		
-		sh 'trufflehog git file://. --only-verified --json'
+		sh 'trufflehog git file://. --only-verified --json >${WORKSPACE}/results/trufflehog.json '
 		
 		sh '''
   			cd ${WORKSPACE}/results 
      			ls -la
+			cat trufflehog.json
 		'''
 		    
             }
