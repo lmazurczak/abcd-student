@@ -23,7 +23,9 @@ pipeline {
 	  		ls -la
         	'''
 		sh 'trufflehog git file://. --only-verified'
-
+		
+		sh 'trufflehog git file://. --only-verified --json'
+		
 		sh '''
   			cd ${WORKSPACE}/results 
      			ls -la
