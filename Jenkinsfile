@@ -41,10 +41,6 @@ pipeline {
 	        
 	 	echo 'Sending reports '
 		
-		defectDojoPublisher(artifact: 'results/semgrep.json', 
-                productName: 'Juice Shop', 
-                scanType: 'Semgrep JSON Report', 
-                engagementName: 'l.mazurczak@gmail.com')
 
 		
         }
