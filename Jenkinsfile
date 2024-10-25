@@ -22,7 +22,7 @@ pipeline {
         		mkdir -p ${WORKSPACE}/results || true
 	  		ls -la
         	'''
-		sh 'semgrep --config=p/ci --exclude tests/ --exclude .git/ .'
+		sh 'semgrep --config=auto .'
 
 
 		sh '''
