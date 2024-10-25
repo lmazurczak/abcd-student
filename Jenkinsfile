@@ -22,16 +22,12 @@ pipeline {
         		mkdir -p ${WORKSPACE}/results || true
 	  		ls -la
         	'''
-		sh 'trufflehog git file://. --since-commit main --only-verified'
+		sh 'semgrep --config=p/ci --exclude tests/ --exclude .git/ .'
 
-		sh 'trufflehog git file://. --only-verified'
-		    
-		sh 'trufflehog git file://. --only-verified --json >${WORKSPACE}/results/trufflehog.json '
-		
+
 		sh '''
   			cd ${WORKSPACE}/results 
      			ls -la
-			cat trufflehog.json
 		'''
 		    
             }
