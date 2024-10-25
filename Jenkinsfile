@@ -22,7 +22,7 @@ pipeline {
         		mkdir -p ${WORKSPACE}/results || true
 	  		ls -la
         	'''
-		sh 'semgrep --config=auto --output=/results/semgrep_report.json --json .'
+		sh 'semgrep --config=auto --output=${WORKSPACE}/results/semgrep_report.json --json .'
 
 
 		sh '''
