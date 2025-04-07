@@ -28,10 +28,14 @@ pipeline {
 		    
                 sh 'osv-scanner scan --lockfile package-lock.json --format json --output ${WORKSPACE}/results/sca-osv-scanner.json || true'
 
+		echo 'ls ...'
+
 		sh '''
+  			
   			cd ${WORKSPACE}/results 
      			ls -la
 			cat semgrep.json
+   			cat sca-osv-scanner.json
 		'''
 		    
             }
