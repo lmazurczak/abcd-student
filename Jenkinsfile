@@ -23,7 +23,10 @@ pipeline {
 	  		ls -la
         	'''
 		sh 'semgrep --config=auto --output=${WORKSPACE}/results/semgrep.json --json .'
-
+		    
+		sh 'osv-scanner scan --lockfile package-lock.json || true'
+		    
+                sh 'osv-scanner scan --lockfile package-lock.json --format json --output ${WORKSPACE}/results/sca-osv-scanner.json || true'
 
 		sh '''
   			cd ${WORKSPACE}/results 
